@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Vehicle</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: url('https://source.unsplash.com/1600x900/?parking,car') no-repeat center center/cover;
+            font-family: 'Arial', sans-serif;
+            color: #343a40;
+        }
+        .navbar {
+            background-color: #343a40;
+        }
+        .navbar-brand {
+            color: #ffffff !important;
+            font-weight: bold;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+            position: relative;
+        }
+        .card:hover:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.3), transparent 50%);
+        }
+        .card:hover {
+            transform: scale(1.03);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: #ffffff;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 20px 0;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .input-group-text {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('index') }}">Parking Management System</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card" onmousemove="hoverEffect(event)">
+                    <div class="card-header">
+                        <h4>Add Vehicle Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            <div class="mb-3">
+                                <label for="v_no" class="form-label">Vehicle Number</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-car-front-fill"></i></span>
+                                    <input type="text" class="form-control" id="v_no" name="v_no" placeholder="Enter vehicle number" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Owner Name</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter owner name" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="v_type" class="form-label">Vehicle Type</label>
+                                <select class="form-select" id="v_type" name="v_type" required>
+                                    <option value="" disabled selected>Select vehicle type</option>
+                                    <option value="Car">Car</option>
+                                    <option value="Bike">Bike</option>
+                                    <option value="Van">Van</option>
+                                    <option value="Cycle">Cycle</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="charged" class="form-label">Amount Charged</label>
+                                <input type="number" class="form-control" id="charged" name="charged" placeholder="Enter amount charged" required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Add Vehicle</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-4">
+        <p>Done by Yeshwanth Raghavendar. R</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <!-- Custom JavaScript for Hover Effect -->
+    <script>
+        function hoverEffect(event) {
+            const card = event.currentTarget;
+            const rect = card.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y`, `${y}px`);
+        }
+    </script>
+</body>
+</html>
